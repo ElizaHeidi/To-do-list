@@ -16,6 +16,7 @@ window.addEventListener('load', () => {
   if (localStorage.getItem('taskList')) {
     ul.innerHTML = localStorage.getItem('taskList');
   }
+  disableDelAll();
 });
 
 function getTask() {
@@ -51,6 +52,9 @@ function getTask() {
     // Save tasks to local storage
     localStorage.setItem('taskList', ul.innerHTML);
   }
+
+  disableDelAll();
+
 } // getTask() ends
 
 taskInput.addEventListener("keypress", function(event) {
@@ -63,7 +67,11 @@ taskInput.addEventListener("keypress", function(event) {
 
   function disableDelAll() {
     console.log('test');
-    delAllBtn.disabled = true;
+    if (ul.childElementCount > 0) {
+      delAllBtn.disabled = false;
+    } else {
+      delAllBtn.disabled = true;
+    }
 }
 
 function clearTask() {
@@ -78,6 +86,7 @@ function deleteTask(e) {
 
     ul.removeChild(li);
     localStorage.setItem('taskList', ul.innerHTML);
+    disableDelAll();
   }
 }
 
@@ -85,10 +94,10 @@ function delAll() {
   while (ul.hasChildNodes()) {
     ul.removeChild(ul.lastChild);
     localStorage.removeItem('taskList');
+    disableDelAll();
 }
 }
 
- 
 
 
 function stopTaskInput(event) {
