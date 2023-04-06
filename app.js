@@ -1,6 +1,6 @@
 let addBtn = document.querySelector('.add-task');
 let tasksDiv = document.querySelector('.tasks');
-const ul = document.getElementById('ul');
+let ul = document.getElementById('ul');
 let clearBtn = document.querySelector('.clear-task');
 let housekeepDiv = document.querySelector('.housekeep');
 const delAllBtn = document.querySelector('.delAll');
@@ -26,62 +26,47 @@ function getTask() {
     housekeepDiv.appendChild(delAllBtn);
     delAllBtnCreated = true;
   }
-
+   
   const li = document.createElement('li');
   if (document.getElementById('task-input').value === '') {
     return;
   } else {
     // Create Trash button
-    handleTrash();
-  
+    const trashBtn = document.createElement('button');
+    trashBtn.classList.add('trash-icon');
 
-  // Create checkbox and label for task
-  const checkbox = document.createElement('input');
-  checkbox.type = 'checkbox';
-  checkbox.name = 'checkbox';
-  checkbox.value = li;
-  checkbox.id = 'checkbox';
-  li.appendChild(checkbox);
+    const icon = document.createElement('i');
+    icon.classList.add('fa-solid', 'fa-trash');
+    trashBtn.appendChild(icon);
 
-  const label = document.createElement('label');
-  label.textContent = document.getElementById('task-input').value;
-  li.appendChild(label);
+    ul.appendChild(trashBtn);
 
-  li.appendChild(document.createElement('br'));
-
-  // Append li element with checkbox, label and trash button to the ul element
-  ul.appendChild(li);
-
-  // Save tasks to local storage
-  localStorage.setItem('taskList', ul.innerHTML);
-}
-
-
- function handleTrash() {
-  const trashBtn = document.createElement('button');
-  trashBtn.classList.add('trash-icon');
-
-  const icon = document.createElement('i');
-  icon.classList.add('fa-solid', 'fa-trash');
-  trashBtn.appendChild(icon);
-
-  li.appendChild(trashBtn);
-}}
-
-// Attach event listener to the ul element using event delegation
-ul.addEventListener('click', function(e) {
-    if (e.target.classList.contains('trash-icon')) {
-      console.log('Trash button clicked');
-      const li = e.target.closest('li');
-      if (li && ul.contains(li)) {
-        ul.removeChild(li);
+    ul.addEventListener('click', function(event) {
+      if (event.target.classList.contains('trash-icon')) {
+        console.log('Trash button clicked');
+        ul.removeChild(label);
+        ul.removeChild(checkbox);
       }
-    } else if (e.target.classList.contains('delAll')) {
-      delAll();
-    }
-  });
-  
+    });
 
+    // Create checkbox and label for task
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.name = 'checkbox';
+    checkbox.value = li;
+    checkbox.id = 'checkbox';
+    ul.appendChild(checkbox);
+
+    const label = document.createElement('label');
+    label.textContent = document.getElementById('task-input').value;
+    ul.appendChild(label);
+
+    ul.appendChild(document.createElement('br'));
+
+    // Save tasks to local storage
+    localStorage.setItem('taskList', ul.innerHTML);
+  }
+}
 
 function clearTask() {
   document.getElementById('task-input').value = '';
@@ -98,13 +83,10 @@ function delAll() {
 
   localStorage.removeItem('taskList');
 
-    // Reset flag for Delete All button
-    delAllBtnCreated = false;
- 
+  // Reset flag for Delete All button
+  delAllBtnCreated = false;
 }
 
 function stopTaskInput(event) {
   event.stopPropagation();
 }
-
-
