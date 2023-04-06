@@ -12,16 +12,13 @@ ul.addEventListener('click', deleteTask); // Add event listener for click on the
 
 let delAllBtnCreated = false;
 
-function getTask() {
-  if (!delAllBtnCreated) {
-    // Create Delete All button
-    const delAllBtn = document.createElement('button');
-    delAllBtn.textContent = 'Delete all';
-    delAllBtn.addEventListener('click', delAll);
-    housekeepDiv.appendChild(delAllBtn);
-    delAllBtnCreated = true;
+window.addEventListener('load', () => {
+  if (localStorage.getItem('taskList')) {
+    ul.innerHTML = localStorage.getItem('taskList');
   }
-   
+});
+
+function getTask() {
   const li = document.createElement('li');
   if (document.getElementById('task-input').value === '') {
     return;
@@ -55,6 +52,12 @@ function getTask() {
     localStorage.setItem('taskList', ul.innerHTML);
   }
 } // getTask() ends
+
+taskInput.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+    getTask();
+    }
+  });
 
 function clearTask() {
   document.getElementById('task-input').value = '';

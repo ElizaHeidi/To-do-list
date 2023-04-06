@@ -2,6 +2,24 @@ body {
     background-color: black;
 }
 
+button {
+    background-color: #00B5BE;
+    border: #E7E9EA;
+    border-radius: 25%;    
+}
+
+.delAll {
+    border-radius: 10%;
+}
+
+.clear-task {
+    border-radius: 10%;
+}
+
+button:hover {
+    background-color: #009AA3;
+}
+
 .add-task {
     margin-bottom: 25px;
 }
@@ -17,11 +35,13 @@ div {
 
 h1 {
     text-align: center;
-    color: white;
+    color: #3ADCE4;
+    font-family: 'Pacifico';
 }
 
 ul {
-    color: white;
+    color: black;
+    margin-left: 497px;
 }
 
 
@@ -29,15 +49,24 @@ ul {
     display: flex;
     align-items: baseline;
     justify-content: center;
+    
 }
 
 .add-task {
     margin-right: 12px;
+   
 }
 
 label[for=task] {
     margin-right: 12px;
-    color: white;
+    color: #3ADCE4;
+    font-family: 'Rancho';
+    font-size: 26px;
+}
+
+label {
+    color: #00B5BE;
+    font-family: 'PT Sans'
 }
 
 #task-input {
