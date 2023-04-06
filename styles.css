@@ -1,0 +1,55 @@
+body {
+    background-color: black;
+}
+
+.add-task {
+    margin-bottom: 25px;
+}
+
+input[type=checkbox]:checked + label {
+    text-decoration: line-through;
+    text-decoration-color: red;
+}
+
+div {
+    /* border: 2px solid; */
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+ul {
+    color: white;
+}
+
+
+#add-task {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.add-task {
+    margin-right: 12px;
+}
+
+label[for=task] {
+    margin-right: 12px;
+    color: white;
+}
+
+#task-input {
+    margin-right: 12px;
+}
+
+.housekeep {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#checkbox {
+    margin-right: 22px;
+}
