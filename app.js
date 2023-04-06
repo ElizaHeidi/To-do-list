@@ -5,12 +5,12 @@ let clearBtn = document.querySelector('.clear-task');
 let housekeepDiv = document.querySelector('.housekeep');
 const delAllBtn = document.querySelector('.delAll');
 const taskInput = document.querySelector('#task-input');
+
 addBtn.addEventListener('click', getTask);
 clearBtn.addEventListener('click', clearTask);
 taskInput.addEventListener('click', stopTaskInput);
 ul.addEventListener('click', deleteTask); // Add event listener for click on the ul element
-
-let delAllBtnCreated = false;
+delAllBtn.addEventListener('click', delAll);
 
 window.addEventListener('load', () => {
   if (localStorage.getItem('taskList')) {
@@ -59,6 +59,13 @@ taskInput.addEventListener("keypress", function(event) {
     }
   });
 
+
+
+  function disableDelAll() {
+    console.log('test');
+    delAllBtn.disabled = true;
+}
+
 function clearTask() {
   document.getElementById('task-input').value = '';
 }
@@ -77,17 +84,12 @@ function deleteTask(e) {
 function delAll() {
   while (ul.hasChildNodes()) {
     ul.removeChild(ul.lastChild);
-  }
-
-  while (housekeepDiv.hasChildNodes()) {
-    housekeepDiv.removeChild(housekeepDiv.lastChild);
-  }
-
-  localStorage.removeItem('taskList');
-
-  // Reset flag for Delete All button
-  delAllBtnCreated = false;
+    localStorage.removeItem('taskList');
 }
+}
+
+ 
+
 
 function stopTaskInput(event) {
   event.stopPropagation();
