@@ -78,6 +78,8 @@ function getTask() {
 // decision tree
   disableDelAll();
 
+  taskInput.value = '';
+
 } // getTask() ends
 
 // Listen for Return key in task-input bar
@@ -99,9 +101,9 @@ function clearTask() {
 // and check if ul child elements are > 0, then run disableDelAll() 
 // decision tree 
 function deleteTask(e) {
-  if (e.target.classList.contains('trash-icon')) {
-    const li = e.target.parentNode;
-    const checkbox = li.querySelector('input[type="checkbox"]');
+  if (e.target.classList.contains('trash-icon') || e.target.classList.contains('fa-trash')) {
+    const li = e.target.closest('li');
+    const checkbox = li.querySelector('input[type=“checkbox”]');
     const label = li.querySelector('label');
 
     ul.removeChild(li);
